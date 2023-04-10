@@ -37,17 +37,13 @@ TC2. 매우 큰 두 수의 쌍 N개를 rand 함수를 이용해 만들어 반복
 <C코드 구현 결과>
 // TC1. 재귀적 방법과 반복적 방법으로 2가지 함수 구현하고 테스트 코드 작성한다.
 // 재귀적 방법
-/*
-int recursiveEuclid(int a, int b)
-{
+
+int recursiveEuclid(int a, int b) {
     if (b == 0) return a;
     return recursiveEuclid(b, a % b);
 }
-*/
 // 반복적 방법
-/*
-int repetitiveEuclid(int a, int b)
-{
+int repetitiveEuclid(int a, int b) {
     int gcd;
 
     while (b != 0) {
@@ -57,9 +53,7 @@ int repetitiveEuclid(int a, int b)
     }
     return a;
 }
-*/
 // 테스트 코드
-/*
 int testEuclid() {
 	int a = 24;
 	int b = 14;
@@ -73,9 +67,9 @@ int testEuclid() {
 
 	return 0;
 }
-*/
 // TC2: 테스트 코드2
 // 매우 큰 두 수의 쌍 N개를 rand 함수를 이용해 만들어 반복적으로 실행하고 두 방법의 값이 같은지 체크하고 모두 마칠 때까지의 실행시간을 비교한다.
+
 int testEuclid2() {
 
 	int n = 1000;
@@ -124,8 +118,7 @@ int testEuclid2() {
 	}
 	return 0;
 }
-int main(void)
-{
+int main(void) {
 	testEuclid1();
 	testEuclid2();
 
