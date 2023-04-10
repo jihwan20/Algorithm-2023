@@ -7,10 +7,8 @@
 
 int main(void)
 {
-    int a[N], b[N];
-    int i;
+	testEuclid1();
+	testEuclid2();
 
-    measureTime(a, b, N);
-
-    return 0;
+	return 0;
 }

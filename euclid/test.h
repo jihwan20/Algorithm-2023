@@ -1,2 +1,3 @@
 #pragma once
-double measureTime(int a[], int b[], int n);
+int testEuclid1();
+int testEuclid2();

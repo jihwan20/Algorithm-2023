@@ -3,44 +3,66 @@
 #include <time.h>
 #include "euclid.h"
 
-// 두 방법의 실행시간을 측정하는 함수
-void testEuclid(int n) {
-    int testCases[n][2];
-    int i, gcd1, gcd2;
-    clock_t startTime, endTime;
-    double recursiveTime, repetitiveTime;
+int testEuclid2() {
 
-    // testCases 배열 초기화
-    for (i = 0; i < n; i++) {
-        testCases[i][0] = rand();
-        testCases[i][1] = rand();
-    }
+	int n = 1000;
+	int a, b; // 임의의 숫자
+	clock_t start, end;
+	int rec_result, rep_result;
+	double rec_time, rep_time;	// 각 함수의 실행시간
 
-    // 재귀적 방법의 실행시간 측정
-    startTime = clock();
-    for (i = 0; i < n; i++) {
-        gcd1 = recursiveEuclid(testCases[i][0], testCases[i][1]);
-    }
-    endTime = clock();
-    recursiveTime = (double)(endTime - startTime) / CLOCKS_PER_SEC;
+	// 랜덤한 매우 큰 두 수의 쌍 N개 생성
+	srand(time(NULL));
+	printf("랜덤 번호 :\n");
+	for (int i = 0; i < n; i++) {
+		a = rand() % 100000000 + 1;
+		b = rand() % 100000000 + 1;
+		printf("%d %d\n", a, b);
+	}
+	printf("\n");
 
-    // 반복적 방법의 실행시간 측정
-    startTime = clock();
-    for (i = 0; i < N; i++) {
-        gcd2 = repetitiveEuclid(testCases[i][0], testCases[i][1]);
-    }
-    endTime = clock();
-    repetitiveTime = (double)(endTime - startTime) / CLOCKS_PER_SEC;
+	// 재귀적 방법으로 각 쌍의 최대공약수 계산
+	start = clock(); // 수행 시간 측정 시작
+	for (int i = 0; i < n; i++) {
+		a = rand() % 100000000 + 1;
+		b = rand() % 100000000 + 1;
+		rec_result = recursiveEuclid(a, b);
+	}
+	end = clock(); // 수행 시간 측정 종료
+	rec_time = (double)(end - start) / CLOCKS_PER_SEC;
 
-    // 두 방법으로 계산한 최대공약수가 같은지 검사
-    for (i = 0; i < N; i++) {
-        if (recursiveEuclid(testCases[i][0], testCases[i][1]) != repetitiveEuclid(testCases[i][0], testCases[i][1])) {
-            printf("ERROR: gcds are not same\n");
-            return;
-        }
-    }
+	// 반복적 방법으로 각 쌍의 최대공약수 계산
+	start = clock(); // 수행 시간 측정 시작
+	for (int i = 0; i < n; i++) {
+		a = rand() % 100000000 + 1;
+		b = rand() % 100000000 + 1;
+		rep_result = repetitiveEuclid(a, b);
+	}
+	end = clock(); // 수행 시간 측정 종료
+	rep_time = (double)(end - start) / CLOCKS_PER_SEC;
 
-    // 실행시간 출력
-    printf("Recursive Euclid time: %.5f sec\n", recursiveTime);
-    printf("Repetitive Euclid time: %.5f sec\n", repetitiveTime);
+	if (rec_result != rep_result) {
+		printf("두 함수의 결과값이 다릅니다.");
+	}
+	else {
+		// 결과 출력
+		printf("재귀적 방법 결과값 : %d, 재귀적 방법 걸린 시간: %f sec\n", rec_result, rec_time);
+		printf("반복적 방법 결과값 : %d, 반복적 방법 걸린 시간: %f sec\n", rep_result, rep_time);
+	}
+	return 0;
+}
+
+
+int testEuclid1() {
+	int a = 24;
+	int b = 14;
+	int gcd_rec, gcd_rep; // 각 함수의 결과값
+
+	gcd_rec = recursiveEuclid(a, b);
+	gcd_rep = repetitiveEuclid(a, b);
+
+	printf("재귀적 방법(%d %d) : %d\n", a, b, gcd_rec);
+	printf("반복적 방법(%d %d) : %d\n", a, b, gcd_rep);
+
+	return 0;
 }
