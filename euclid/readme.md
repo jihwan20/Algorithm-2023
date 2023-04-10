@@ -124,6 +124,9 @@ TC2. 매우 큰 두 수의 쌍 N개를 rand 함수를 이용해 만들어 반복
 		}
 		return 0;
 	}
+	
+// 메인 함수
+
 	int main(void) {
 		testEuclid1();
 		testEuclid2();
