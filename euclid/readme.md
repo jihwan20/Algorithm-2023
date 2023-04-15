@@ -21,6 +21,7 @@
 의사코드
 
 int recursiveEuclid(int a, int b)
+
 {
 
     if (b == 0) return a;
