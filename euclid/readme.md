@@ -38,7 +38,9 @@
 2. 최대공약수(b, a mod b)
 3. b가 0이 될때까지 반복한다.
 
-반복적 방법 의사코드
+### 반복적 방법
+
+의사코드
 
 	int repetitiveEuclid(int a, int b)
 	{
@@ -52,7 +54,11 @@
 	    return a;
 	}
 
-반복적 방법 처리순서:
+순서도
+
+![image](https://user-images.githubusercontent.com/90670592/232192613-5d6460fc-6f4b-4a42-92d4-bb6590a9f4a5.png)
+
+처리순서:
 1. 최대공약수(a, b)
 2. b 위치에 a와 b를 나눈 나머지 값을 놓는다.
 3. a 위치에 b를 놓는다.
