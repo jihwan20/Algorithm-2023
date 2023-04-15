@@ -16,7 +16,9 @@
 
 출력: 최대공약수(a, b)
 
-재귀적 방법 의사코드
+### 재귀적방법
+
+의사코드
 
 int recursiveEuclid(int a, int b)
 {
@@ -24,7 +26,11 @@ int recursiveEuclid(int a, int b)
     return recursiveEuclid(b, a % b);
 }
 
-재귀적 방법 처리순서:
+순서도
+
+![재귀적 함수](https://user-images.githubusercontent.com/90670592/232190587-a4e73e0d-5274-4337-aeda-79f76e8f8b5d.png)
+
+처리순서:
 1. 최대공약수(a, b)
 2. 최대공약수(b, a mod b)
 3. b가 0이 될때까지 반복한다.
