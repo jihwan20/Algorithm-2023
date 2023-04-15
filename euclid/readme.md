@@ -16,10 +16,32 @@
 
 출력: 최대공약수(a, b)
 
+재귀적 방법 의사코드
+
+int recursiveEuclid(int a, int b)
+{
+    if (b == 0) return a;
+    return recursiveEuclid(b, a % b);
+}
+
 재귀적 방법 처리순서:
 1. 최대공약수(a, b)
 2. 최대공약수(b, a mod b)
 3. b가 0이 될때까지 반복한다.
+
+반복적 방법 의사코드
+
+int repetitiveEuclid(int a, int b)
+{
+    int gcd;
+
+    while (b != 0) {
+        gcd = b;
+        b = a % b;
+        a = gcd;
+    }
+    return a;
+}
 
 반복적 방법 처리순서:
 1. 최대공약수(a, b)
