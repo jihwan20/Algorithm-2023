@@ -20,15 +20,14 @@
 
 의사코드
 
-int recursiveEuclid(int a, int b)
+	int recursiveEuclid(int a, int b)
+	{
 
-{
+  	  if (b == 0) return a;
+    
+ 	   return recursiveEuclid(b, a % b);
 
-    if (b == 0) return a;
-    
-    return recursiveEuclid(b, a % b);
-    
-}
+	}
 
 순서도
 
@@ -41,17 +40,17 @@ int recursiveEuclid(int a, int b)
 
 반복적 방법 의사코드
 
-int repetitiveEuclid(int a, int b)
-{
-    int gcd;
+	int repetitiveEuclid(int a, int b)
+	{
+	    int gcd;
 
-    while (b != 0) {
-        gcd = b;
-        b = a % b;
-        a = gcd;
-    }
-    return a;
-}
+	    while (b != 0) {
+		gcd = b;
+		b = a % b;
+		a = gcd;
+	    }
+	    return a;
+	}
 
 반복적 방법 처리순서:
 1. 최대공약수(a, b)
