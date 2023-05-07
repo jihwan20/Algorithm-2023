@@ -148,6 +148,8 @@ int main()
     Point* Pair[2];
     Closest_Pair(P, 0, SIZE, Pair);
 
+    FILE* input, * output;
+
     int i;
     FILE* fp = fopen("result.txt", "w");// 쓰기용 파일 열기
     if (fp == NULL) 					// 파일 열기 실패시
