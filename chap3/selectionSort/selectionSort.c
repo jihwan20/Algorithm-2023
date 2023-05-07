@@ -1,86 +1,76 @@
 ﻿#include <stdio.h>
-#include <stdlib.h>
-#define MAX_SIZE 1000
 
-// 배열에서 두 원소의 위치를 바꿔주는 함수
-void swap(int* a, int* b) {
-    int temp = *a;
-    *a = *b;
-    *b = temp;
-}
+void Selection(int* num, int n, int k) // 선택 정렬 함수
+{
+    if (n <= 1) {
+        return;
+    }
 
-// 분할을 수행하는 함수
-int partition(int arr[], int left, int right) {
-    int pivot = arr[right]; // pivot은 배열의 마지막 원소로 선택
-    int i = left - 1; // i는 pivot보다 작은 원소들의 끝 인덱스
+    int p = num[n / 2];
+    int S = 0;
+    int i = 0, j = n - 1; // 배열의 처음과 끝에서부터 시작하는 인덱스
 
-    // pivot을 기준으로 배열을 분할
-    for (int j = left; j < right; j++) {
-        if (arr[j] < pivot) {
+    while (i <= j) {  // i와 j 인덱스가 엇갈릴 때까지 반복
+        while (num[i] < p) { // pivot 값보다 큰 값이 나오도록 i 인덱스 이동
             i++;
-            swap(&arr[i], &arr[j]);
+        }
+        while (num[j] > p) { // pivot 값보다 작은 값이 나오도록 j 인덱스 이동
+            j--;
+        }
+
+        if (i <= j) { // i와 j 인덱스가 엇갈린 경우 반복문 종료
+            int tmp = num[i]; // i와 j 인덱스가 가리키는 값 swap
+            num[i] = num[j];
+            num[j] = tmp;
+            i++;
+            j--;
         }
     }
 
-    swap(&arr[i + 1], &arr[right]); // pivot을 자신보다 작은 원소들의 끝 다음으로 이동
-
-    return i + 1; // pivot의 위치를 반환
-}
-
-// 선택 문제를 해결하는 함수
-int select(int arr[], int left, int right, int k) {
-    if (left == right) { // 배열의 길이가 1인 경우, 첫 번째 원소를 반환
-        return arr[left];
+    // pivot이 k번째 작은 수인 경우
+    if (k == i) {
+        return;
     }
-
-    int pivotIndex = partition(arr, left, right); // 배열을 분할하여 pivot의 위치를 구함
-    int length = pivotIndex - left + 1; // pivot을 포함한 왼쪽 부분 배열의 길이
-
-    if (k == length) { // k가 왼쪽 부분 배열의 길이와 같으면 pivot을 반환
-        return arr[pivotIndex];
+    // k가 현재 pivot을 기준으로 왼쪽 부분 배열에 속하는 경우
+    else if (k < i) {
+        Selection(num, i - 1, k);
     }
-    else if (k < length) { // k가 왼쪽 부분 배열의 길이보다 작으면 왼쪽 부분 배열에서 k번째 작은 원소를 찾음
-        return select(arr, left, pivotIndex - 1, k);
-    }
-    else { // k가 왼쪽 부분 배열의 길이보다 크면 오른쪽 부분 배열에서 (k - 왼쪽 부분 배열의 길이)번째 작은 원소를 찾음
-        return select(arr, pivotIndex + 1, right, k - length);
+    // k가 현재 pivot을 기준으로 오른쪽 부분 배열에 속하는 경우
+    else {
+        Selection(num + i, n - i, k - i);
     }
 }
 
 int main() {
-    int arr[MAX_SIZE];
-    int n, k;
+    int n = 0;
+    int num[100];
+    int k = 0;
+    FILE* input, * output;
+    input = fopen("data.txt", "r");
+    output = fopen("result.txt", "w");
 
-    // 입력 받기
-    FILE* fp = fopen("data.txt", "r");
-    if (fp == NULL) {
-        printf("data.txt 파일 열기 실패\n");
-        return 1; // 프로그램 종료
+    fscanf(input, "%d", &n);
+    fscanf(output, "%d", &k);
+
+    if (k > n) {
+        fprintf(output, "잘못된 입력");
+        return 0;
     }
 
-    fscanf(fp, "%d", &n); // 배열의 길이를 입력 받음
-
-    for (int i = 0; i < n; i++) { // 배열의 원소들을 입력 받음
-        fscanf(fp, "%d", &arr[i]);
+    for (int i = 0; i < n; i++) {
+        fscanf(input, "%d", &num[i]);
     }
 
-    fscanf(fp, "%d", &k); // k를 입력 받음
-
-    fclose(fp);
-
-    // 선택 문제 해결하기
-    int result = select(arr, 0, n - 1, k);
-
-    // 결과 출력하기
-    fp = fopen("result.txt", "w");
-    if (fp == NULL) {
-        printf("result.txt 파일 열기 실패\n");
-        return 1;
+    fprintf(output, "입력한 숫자: ");
+    for (int i = 0; i < n; i++) {
+        fprintf(output, "%d ", num[i]);
     }
 
-    fprintf(fp, "%d", result);
+    Selection(num, n, k);
 
-    fclose(fp);
+    fprintf(output, "\nk번째로 작은 수: %d", num[k - 1]);
 
+    fclose(input);
+    fclose(output);
     return 0;
 }
