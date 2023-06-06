@@ -2,6 +2,7 @@
 #include <Windows.h>
 #include <conio.h>
 #include <stdio.h>
+#define MAX_SIZE 10
 
 gotoxy(int x, int y)
 {
@@ -19,13 +20,15 @@ void print_subMenu()
         switch (subNum)
         {
         case 1:
-            printf("날짜순 on\n");
+            printf("\n날짜순 on\n");
             break;
         case 2:
-            printf("금액순 on\n");
+            printf("\n금액순 on\n");
             break;
         case 3:
-            return 0;
+            printf("\n보기로 이동\n");
+            system("cls");
+            return;
         }
     }
 }
@@ -41,19 +44,20 @@ void print_mainMenu()
         switch (mainNum)
         {
         case 1:
+            system("cls");
             print_subMenu();
             break;
         case 2:
-            printf("내용 추가 메뉴 선택");
+            printf("\n내용 추가 메뉴 선택\n");
             break;
         case 3:
-            printf("내용 수정 메뉴 선택");
+            printf("\n내용 수정 메뉴 선택\n");
             break;
         case 4:
-            printf("내용 삭제 메뉴 선택");
+            printf("\n내용 삭제 메뉴 선택\n");
             break;
         case 5:
-            printf("종료 선택");
+            printf("\n종료 선택\n");
             exit(1);
             break;
         }
@@ -61,75 +65,32 @@ void print_mainMenu()
     
 }
 
-int main()
+void draw_todo()
 {
-    system("cls");
+    int i, j;
 
     gotoxy(0, 0);
     printf("□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□\n");
+    
 
-    gotoxy(0, 1);
-    printf("□");
-
-    gotoxy(94, 1);
-    printf("□");
-
-    gotoxy(0, 2);
-    printf("□");
-
-    gotoxy(94, 2);
-    printf("□");
-
-    gotoxy(0, 3);
-    printf("□");
-
-    gotoxy(94, 3);
-    printf("□");
-
-    gotoxy(0, 4);
-    printf("□");
-
-    gotoxy(94, 4);
-    printf("□");
-
-    gotoxy(0, 5);
-    printf("□");
-
-    gotoxy(94, 5);
-    printf("□");
-
-    gotoxy(0, 6);
-    printf("□");
-
-    gotoxy(94, 6);
-    printf("□");
-
-    gotoxy(0, 7);
-    printf("□");
-
-    gotoxy(94, 7);
-    printf("□");
-
-    gotoxy(0, 8);
-    printf("□");
-
-    gotoxy(94, 8);
-    printf("□");
-
-    gotoxy(0, 9);
-    printf("□");
-
-    gotoxy(94, 9);
-    printf("□");
-
-    gotoxy(0, 10);
-    printf("□");
-
-    gotoxy(94, 10);
-    printf("□");
+    for (i = 1; i <= 10; i++)
+    {
+        gotoxy(0, i);
+        printf("□");
+        gotoxy(94, i);
+        printf("□");
+    }
 
     gotoxy(0, 11);
     printf("□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□□\n");
+}
+
+int main()
+{
+
+    system("cls");
+
+    draw_todo();
     print_mainMenu();
 	return 0;
 }
